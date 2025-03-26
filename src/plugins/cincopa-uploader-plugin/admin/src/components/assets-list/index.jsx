@@ -4,18 +4,19 @@ import { useIntl } from 'react-intl';
 import { getTranslation } from '../../utils/getTranslation';
 import AssetItem from '../assets-list/asset-item.jsx';
 
-const AssetsList = ({ userAssets }) => {
+const AssetsList = ({ userAssets, isLoading }) => {
   const { formatMessage } = useIntl();
 
-  console.log(userAssets, 'userAssets'); // Debugging log to inspect data
+  if(isLoading){
+    return;
+  }
 
-  // Check if there are no assets and handle that case
   if (!userAssets || userAssets.length === 0) {
     return (
       <Flex justifyContent="center" padding={5}>
         <Typography variant="omega" textColor="neutral700">
           {formatMessage({
-            id: getTranslation('AssetsList.no-assets'), // Add the appropriate translation key for no assets
+            id: getTranslation('AssetsList.no-assets'),
             defaultMessage: 'No assets found',
           })}
         </Typography>

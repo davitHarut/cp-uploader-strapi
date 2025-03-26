@@ -33,7 +33,6 @@ const ModalNewUpload = ({ isOpen, onToggle = () => {} }) => {
                   thumbnail: `https://rtcdn.cincopa.com/thumb.aspx?size=large&rid=${data.rid}`,
                 });
               }
-              // onToggle();
             }
           },
         });
@@ -71,11 +70,11 @@ const ModalNewUpload = ({ isOpen, onToggle = () => {} }) => {
           </Modal.Header>
           <Modal.Body>
             <Box ref={uploaderRef}></Box> {/* This is where the uploader will be rendered */}
-            {uploadData && uploadData.thumbnail && (
+            {/* {uploadData && uploadData.thumbnail && (
               <div>
                 <img src={uploadData.thumbnail} alt="Uploaded Thumbnail" />
               </div>
-            )}
+            )} */}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={onToggle} variant="tertiary">

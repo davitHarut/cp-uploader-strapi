@@ -52,6 +52,11 @@ export default {
     script.src = "https://wwwcdn.cincopa.com/_cms/ugc/uploaderui.js";
     script.async = true;
     document.body.appendChild(script);
+
+    const cincopaScript = document.createElement("script");
+    cincopaScript.src = "//wwwcdn.cincopa.com/_cms/media-platform/libasync.js";
+    cincopaScript.async = true;
+    document.body.appendChild(cincopaScript);
     script.onload = () => {
       // console.log(cpUploadUI, 'cpUploadUI');
     }
