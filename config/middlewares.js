@@ -5,8 +5,8 @@ module.exports = [
       contentSecurityPolicy: {
         directives: {
           'default-src': ["'self'", "*"],
-          'script-src': ["'self'", "'unsafe-inline'", "*.cincopa.com"],
-          'style-src': ["'self'", "'unsafe-inline'", "*.cincopa.com"],
+          'script-src': ["'self'", "'unsafe-inline'", "*"],
+          'style-src': ["'self'", "'unsafe-inline'", "*"],
           'img-src': ["'self'", "data:", "*"],
         },
       },

@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_updates",
+  "info": {
+    "singularName": "product-update",
+    "pluralName": "product-updates",
+    "displayName": "Product update"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Body": {
+      "type": "blocks"
+    },
+    "cincopa_uploader_plugin_cincopa_assets": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::cincopa-uploader-plugin.cincopa-asset",
+      "inversedBy": "product_updates"
+    },
+    "mux_video_uploader_mux_assets": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::mux-video-uploader.mux-asset",
+      "inversedBy": "product_updates"
+    }
+  }
+}

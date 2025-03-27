@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cincopaAssets",
+  "info": {
+    "description": "Cincopa assets collection type",
+    "displayName": "Cincopa Asset",
+    "singularName": "cincopa-asset",
+    "pluralName": "cincopa-assets"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "label": "Asset Title",
+      "type": "string",
+      "private": false,
+      "required": true,
+      "maxLength": 250,
+      "configurable": true
+    },
+    "descriptoion": {
+      "label": "Asset Description",
+      "type": "string",
+      "private": false,
+      "required": true,
+      "maxLength": 400,
+      "configurable": true
+    },
+    "asset_rid": {
+      "label": "Asset RID",
+      "type": "string",
+      "required": true
+    },
+    "product_updates": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product-update.product-update",
+      "mappedBy": "cincopa_uploader_plugin_cincopa_assets"
+    }
+  }
+}

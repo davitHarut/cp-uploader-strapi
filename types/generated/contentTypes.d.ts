@@ -369,6 +369,44 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProductUpdateProductUpdate
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_updates';
+  info: {
+    displayName: 'Product update';
+    pluralName: 'product-updates';
+    singularName: 'product-update';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Body: Schema.Attribute.Blocks;
+    cincopa_uploader_plugin_cincopa_assets: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::cincopa-uploader-plugin.cincopa-asset'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-update.product-update'
+    > &
+      Schema.Attribute.Private;
+    mux_video_uploader_mux_assets: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::mux-video-uploader.mux-asset'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginCincopaUploaderPluginCincopaAsset
   extends Struct.CollectionTypeSchema {
   collectionName: 'cincopaAssets';
@@ -406,6 +444,10 @@ export interface PluginCincopaUploaderPluginCincopaAsset
       'plugin::cincopa-uploader-plugin.cincopa-asset'
     > &
       Schema.Attribute.Private;
+    product_updates: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::product-update.product-update'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -551,6 +593,118 @@ export interface PluginI18NLocale extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface PluginMuxVideoUploaderMuxAsset
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'muxassets';
+  info: {
+    description: 'Represents a Mux Asset item, including upload and playback details';
+    displayName: 'Mux Asset';
+    pluralName: 'mux-assets';
+    singularName: 'mux-asset';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: true;
+    };
+  };
+  attributes: {
+    aspect_ratio: Schema.Attribute.String;
+    asset_data: Schema.Attribute.JSON;
+    asset_id: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    duration: Schema.Attribute.Decimal;
+    error_message: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    isReady: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::mux-video-uploader.mux-asset'
+    > &
+      Schema.Attribute.Private;
+    playback_id: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    product_updates: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::product-update.product-update'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    signed: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Configurable &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+        minLength: 3;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    upload_id: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+  };
+}
+
+export interface PluginMuxVideoUploaderMuxTextTrack
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'muxtexttracks';
+  info: {
+    description: 'Temporary storage for user-defined subtitles & captions sent to Mux during video uploads';
+    displayName: 'Mux Text Track';
+    pluralName: 'mux-text-tracks';
+    singularName: 'mux-text-track';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    closed_captions: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    file: Schema.Attribute.JSON & Schema.Attribute.Required;
+    language_code: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::mux-video-uploader.mux-text-track'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -928,10 +1082,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::product-update.product-update': ApiProductUpdateProductUpdate;
       'plugin::cincopa-uploader-plugin.cincopa-asset': PluginCincopaUploaderPluginCincopaAsset;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
+      'plugin::mux-video-uploader.mux-asset': PluginMuxVideoUploaderMuxAsset;
+      'plugin::mux-video-uploader.mux-text-track': PluginMuxVideoUploaderMuxTextTrack;
       'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
       'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;
       'plugin::upload.file': PluginUploadFile;
